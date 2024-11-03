@@ -1,6 +1,6 @@
 # Docker Learning Project
 ---
-5. 创建 MongoDB 和 MongoDB express 容器
+
 ### 目录：
 1. [安装 WSL 与 Docker Desktop](#1-安装-docker-desktop-和-wsl)
 2. [该项目中可能会遇到的问题](#2-该教程中可能会遇到的问题)
