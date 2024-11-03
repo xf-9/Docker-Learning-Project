@@ -1,5 +1,8 @@
 # Docker Learning Project
 ---
+## 这是一个 Docker Learning Project
+该项目的目的是学习Docker的基本知识、如何使用Docker容器来运行MongoDB及其管理界面MongoDB Express、以及如何使用Docker Compose来管理多容器应用。
+详细教程请查看 **Docker Learning Project.mb**
 
 ### 目录：
 1. [安装 WSL 与 Docker Desktop](#1-安装-docker-desktop-和-wsl)
