@@ -1,0 +1,39 @@
+# 启动 MongoDB，MongoDB Express 和 Demo应用程序
+version: '3'
+services:
+  my-app:
+    image: my-app:1.1 # Node.js 应用镜像
+    ports:
+      - 3000:3000 # 映射主机的 3000 端口到容器的 3000 端口
+    depends_on:
+      - mongo # 确保在 my-app 启动前 mongo 容器已启动
+    environment:
+      - NODE_ENV=production # 设置环境变量
+
+  mongo:
+    image: mongo # 使用官方 MongoDB 镜像
+    ports:
+      - 27017:27017 # 映射主机的 27017 端口到容器的 27017 端口
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin # MongoDB root 用户名
+      - MONGO_INITDB_ROOT_PASSWORD=password # MongoDB root 密码
+    volumes:
+      - mongo-data:/data/db # 持久化 MongoDB 数据
+
+  mongo-express:
+    image: mongo-express # 使用官方 Mongo Express 镜像
+    restart: always # 确保 Mongo Express 总是重启
+    ports:
+      - 8080:8081 # 映射主机的 8080 端口到容器的 8081 端口
+    depends_on:
+      - mongo    
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin # Mongo Express 连接 MongoDB 的用户名
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password # Mongo Express 连接 MongoDB 的密码
+      - ME_CONFIG_MONGODB_SERVER=mongo # MongoDB 容器名称
+      - ME_CONFIG_BASICAUTH_USERNAME=test # Mongo Express 的基本认证用户名
+      - ME_CONFIG_BASICAUTH_PASSWORD=1234 # Mongo Express 的基本认证密码
+
+volumes:
+  mongo-data:
+    driver: local # 使用本地驱动持久化数据
